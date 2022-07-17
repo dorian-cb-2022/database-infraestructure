@@ -1,0 +1,48 @@
+name: Deploy Cloudformation Stack
+
+on:
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'AWS Region'
+        required: true
+        default: 'us-east-1'
+      template-path:
+        description: 'CFN template path inside repo'
+        required: true
+        default: 'deploy/cloudformation/template.yaml'
+      service-name:
+        description: 'Name of the service this template will be used in'
+        required: true
+        default: ''
+      resource-type:
+        description: 'Type of resource to be deployed in this CFN template'
+        required: true
+        default: ''
+
+jobs:
+  stack:
+    name: Deploy stack to AWS
+    runs-on: ubuntu-latest
+    outputs:
+      env-name: ${{ steps.env-name.outputs.environment }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      id: creds
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ github.event.inputs.region }}
+
+    - name: Deploy CFN stack
+      id: eks-cluster
+      uses: aws-actions/aws-cloudformation-github-deploy@master
+      with:
+        name: ${{ github.event.inputs.service-name }}-${{ github.event.inputs.service-type }}
+        template: ${{ github.event.inputs.template-path }}
+        no-fail-on-empty-changeset: "1"
+        parameter-overrides: ""
