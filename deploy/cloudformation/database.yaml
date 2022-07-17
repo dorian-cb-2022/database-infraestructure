@@ -64,4 +64,3 @@ Resources:
       MasterUsername: !Ref DBUsername
       MasterUserPassword: !Ref DBPassword
       MonitoringInterval: '60'
-      MonitoringRoleArn: 'arn:aws:iam::123456789012:role/rds-monitoring-role'
