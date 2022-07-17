@@ -62,9 +62,28 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow all inbound and outbund communications
+      VpcId: vpc-07ae88c6c1b5ea50d
       SecurityGroupIngress:
         - IpProtocol: -1
           CidrIp: 0.0.0.0/0
       SecurityGroupEgress:
         - IpProtocol: -1
           CidrIp: 0.0.0.0/0
+
+
+Outputs:
+  InstanceId:
+    Description: InstanceId of the newly created RDS Instance
+    Value: !Ref PostgresDB
+    Export:
+      Name: !Sub ${AWS::StackName}-InstanceId
+  Port:
+    Description: InstanceId of the newly created RDS Instance
+    Value: !GetAtt PostgresDB.Endpoint.Port
+    Export:
+      Name: !Sub ${AWS::StackName}-Port
+  Endpoint:
+    Description: InstanceId of the newly created RDS Instance
+    Value: !GetAtt PostgresDB.Endpoint.Address
+    Export:
+      Name: !Sub ${AWS::StackName}-Endpoint
