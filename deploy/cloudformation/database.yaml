@@ -57,7 +57,7 @@ Resources:
       SecurityGroupEgress:
         - IpProtocol: -1
           CidrIp: 0.0.0.0/0
-          
+
   PostgresDB:
     DependsOn: DBSecurityGroup
     Type: 'AWS::RDS::DBInstance'
@@ -69,7 +69,7 @@ Resources:
       EngineVersion: "13.4"
       MasterUsername: !Ref DBUsername
       MasterUserPassword: !Ref DBPassword
-      DBSecurityGroups:
+      VPCSecurityGroups:
         - !Ref DBSecurityGroup
 
 
