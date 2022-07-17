@@ -24,12 +24,12 @@ Parameters:
     AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
     ConstraintDescription: Must begin with a letter and contain only alphanumeric characters.
   DBInstanceClass:
-    Default: db.m5.large
+    Default: db.t3.micro
     Description: DB instance class
     Type: String
     ConstraintDescription: Must select a valid DB instance type.
   DBAllocatedStorage:
-    Default: '50'
+    Default: '20'
     Description: The size of the database (GiB)
     Type: Number
     MinValue: '20'
@@ -60,7 +60,6 @@ Resources:
       DBInstanceClass: !Ref DBInstanceClass
       AllocatedStorage: !Ref DBAllocatedStorage
       Engine: MySQL
-      EngineVersion: "8.0.16"
+      EngineVersion: "13.4"
       MasterUsername: !Ref DBUsername
       MasterUserPassword: !Ref DBPassword
-      MonitoringInterval: '60'
