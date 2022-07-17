@@ -15,14 +15,6 @@ Parameters:
     ConstraintDescription: >-
       Must begin with a letter and must not end with a hyphen or contain two
       consecutive hyphens.
-  DBName:
-    Default: mydb
-    Description: My database
-    Type: String
-    MinLength: '1'
-    MaxLength: '64'
-    AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
-    ConstraintDescription: Must begin with a letter and contain only alphanumeric characters.
   DBInstanceClass:
     Default: db.t3.micro
     Description: DB instance class
@@ -56,7 +48,6 @@ Resources:
     Type: 'AWS::RDS::DBInstance'
     Properties:
       DBInstanceIdentifier: !Ref DBInstanceID
-      DBName: !Ref DBName
       DBInstanceClass: !Ref DBInstanceClass
       AllocatedStorage: !Ref DBAllocatedStorage
       Engine: MySQL
