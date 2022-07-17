@@ -56,7 +56,8 @@ Resources:
       EngineVersion: "13.4"
       MasterUsername: !Ref DBUsername
       MasterUserPassword: !Ref DBPassword
-      DBSecurityGroups: !Ref DBSecurityGroup
+      DBSecurityGroups:
+        - !Ref DBSecurityGroup
 
   DBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
