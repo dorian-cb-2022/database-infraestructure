@@ -10,15 +10,15 @@ on:
       template-path:
         description: 'CFN template path inside repo'
         required: true
-        default: 'deploy/cloudformation/template.yaml'
+        default: 'deploy/cloudformation/database.yaml'
       service-name:
         description: 'Name of the service this template will be used in'
         required: true
-        default: ''
+        default: 'addresses'
       resource-type:
         description: 'Type of resource to be deployed in this CFN template'
         required: true
-        default: ''
+        default: 'database'
 
 jobs:
   deploy:
