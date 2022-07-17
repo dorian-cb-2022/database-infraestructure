@@ -45,6 +45,19 @@ Parameters:
     ConstraintDescription: must contain only alphanumeric characters.
 
 Resources:
+
+  DBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow all inbound and outbund communications
+      VpcId: vpc-07ae88c6c1b5ea50d
+      SecurityGroupIngress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+          
   PostgresDB:
     DependsOn: DBSecurityGroup
     Type: 'AWS::RDS::DBInstance'
@@ -58,18 +71,6 @@ Resources:
       MasterUserPassword: !Ref DBPassword
       DBSecurityGroups:
         - !Ref DBSecurityGroup
-
-  DBSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Allow all inbound and outbund communications
-      VpcId: vpc-07ae88c6c1b5ea50d
-      SecurityGroupIngress:
-        - IpProtocol: -1
-          CidrIp: 0.0.0.0/0
-      SecurityGroupEgress:
-        - IpProtocol: -1
-          CidrIp: 0.0.0.0/0
 
 
 Outputs:
