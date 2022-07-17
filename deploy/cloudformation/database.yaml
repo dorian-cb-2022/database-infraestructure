@@ -64,11 +64,7 @@ Resources:
     GroupDescription: Allow all inbound and outbund communications
     SecurityGroupIngress:
       - IpProtocol: -1
-        FromPort: -1
-        ToPort: -1
         CidrIp: 0.0.0.0/0
     SecurityGroupEgress:
       - IpProtocol: -1
-        FromPort: -1
-        ToPort: -1
         CidrIp: 0.0.0.0/0
